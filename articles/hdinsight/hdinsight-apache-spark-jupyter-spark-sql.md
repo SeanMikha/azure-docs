@@ -113,20 +113,20 @@ In this article, you use the **PySpark** kernel in the notebook from where you r
 
 6. Register a sample data set as a temporary table (**hvac**) by running the following code.
 
-		# Load the data
-		hvacText = sc.textFile("wasbs:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
+	# Load the data
+	hvacText = sc.textFile("wasbs:///HdiSamples/HdiSamples/SensorSampleData/hvac/HVAC.csv")
 
-		# Create the schema
-		hvacSchema = StructType([StructField("date", StringType(), False),StructField("time", StringType(), False),StructField("targettemp", IntegerType(), False),StructField("actualtemp", IntegerType(), False),StructField("buildingID", StringType(), False)])
+	# Create the schema
+	hvacSchema = StructType([StructField("date", StringType(), False),StructField("time", StringType(), False),StructField("targettemp", IntegerType(), False),StructField("actualtemp", IntegerType(), False),StructField("buildingID", StringType(), False)])
 
-		# Parse the data in hvacText
-		hvac = hvacText.map(lambda s: s.split(",")).filter(lambda s: s[0] != "Date").map(lambda s:(str(s[0]), str(s[1]), int(s[2]), int(s[3]), str(s[6]) ))
+	# Parse the data in hvacText
+	hvac = hvacText.map(lambda s: s.split(",")).filter(lambda s: s[0] != "Date").map(lambda s:(str(s[0]), str(s[1]), int(s[2]), int(s[3]), str(s[6]) ))
 
-		# Create a data frame
-		hvacdf = sqlContext.createDataFrame(hvac,hvacSchema)
+	# Create a data frame
+	hvacdf = sqlContext.createDataFrame(hvac,hvacSchema)
 
-		# Register the data frame as a table to run queries against
-		hvacdf.registerTempTable("hvac")
+	# Register the data frame as a table to run queries against
+	hvacdf.registerTempTable("hvac")
 
     Spark clusters in HDInsight come with a sample data file, **hvac.csv**, under **\HdiSamples\HdiSamples\SensorSampleData\hvac**.
 
