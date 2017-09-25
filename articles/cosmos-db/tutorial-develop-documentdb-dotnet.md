@@ -87,6 +87,7 @@ using System.Net;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 ```
 
 ## <a id="add-references"></a>Connect your app
